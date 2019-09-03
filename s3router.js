@@ -51,7 +51,8 @@ function S3Router(options, middleware) {
     function tempRedirect(req, res) {
         var params = {
             Bucket: S3_BUCKET,
-            Key: checkTrailingSlash(getFileKeyDir(req)) + req.params[0]
+            Key: checkTrailingSlash(getFileKeyDir(req)) + req.params[0],
+            Expires: options.Expires
         };
         var s3 = getS3();
         s3.getSignedUrl('getObject', params, function(err, url) {
